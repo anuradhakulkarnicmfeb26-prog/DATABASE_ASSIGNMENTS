@@ -1,0 +1,20 @@
+1) Which field of the Customers table is the primary key? 
+
+Cnum is the Primary Key of the Customers table (it uniquely identifies each customer).
+
+
+2) What is the 4th column of the Customers table? 
+
+Rating is the 4th column (the structure is Cnum, Cname, City, Rating, Snum)
+
+
+3) What is another word for row?  For column? 
+
+Another word for a row is a Record (or Tuple). Another word for a column is a Field (or Attribute).
+
+
+4) Why isn’t it possible to see the first five rows of a table? 
+
+In standard SQL, it is possible to see the first five rows using a LIMIT clause (e.g., SELECT * FROM Customers LIMIT 5;). 
+However, if you mean "the first five" in a specific order, 
+it isn't guaranteed unless you use an ORDER BY clause, because relational databases store data as unordered sets.
