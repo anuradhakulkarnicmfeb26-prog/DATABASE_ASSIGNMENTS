@@ -1,0 +1,95 @@
+ Display the Supplier table in the descending order of CITY
+
+mysql> SELECT * FROM S ORDER BY CITY DESC;
++------+-------+--------+----------+
+| Sid  | Sname | Status | City     |
++------+-------+--------+----------+
+|    4 | LATA  |     40 | SOLAPUR  |
+|    7 | BIDEN |     70 | r Athens |
+|    1 | ANU   |     10 | PUNE     |
+|    6 | TRUMP |     60 | PARIS    |
+|    2 | RADHA |     20 | MUMBAI   |
+|    5 | JOHN  |     50 | LONDON   |
+|    3 | SNEHA |     30 | BANGLORE |
++------+-------+--------+----------+
+7 rows in set (0.006 sec)
+
+Display the Part Table in the ascending order of CITY and within the city in 
+the ascending order of Part names. 
+
+mysql> SELECT * FROM P ORDER BY CITY ASC ,PNAME ASC;
++------+-------+-------+--------+---------+
+| PID  | PNAME | COLOR | WEIGHT | CITY    |
++------+-------+-------+--------+---------+
+| P5   | PIN   | RED   |     12 | ATHENS  |
+| P4   | GEAR  | WHITE |     13 | KOLKATA |
+| P1   | NUT   | RED   |     12 | LONDON  |
+| P6   | PLATE | GREEN |     17 | NEWYORK |
+| P2   | BOLT  | GREEN |     17 | PARIS   |
+| P3   | SCREW | BLUE  |     14 | PUNE    |
++------+-------+-------+--------+---------+
+6 rows in set (0.007 sec)
+
+Display all the Suppliers with a status between 10 and 20.
+
+mysql> SELECT * FROM S WHERE Status BETWEEN 10 AND 20;
++------+-------+--------+--------+
+| Sid  | Sname | Status | City   |
++------+-------+--------+--------+
+|    1 | ANU   |     10 | PUNE   |
+|    2 | RADHA |     20 | MUMBAI |
++------+-------+--------+--------+
+2 rows in set (0.006 sec)
+
+
+Display all the Parts and their Weight, which are not in the range of 10 and 15.   
+
+mysql> SELECT PNAME,WEIGHT FROM P WHERE WEIGHT NOT BETWEEN 10 AND 15;
++-------+--------+
+| PNAME | WEIGHT |
++-------+--------+
+| BOLT  |     17 |
+
+| PLATE |     17 |
++-------+--------+
+2 rows in set (0.007 sec)
+
+
+Display all the Part names starting with the letter ‘S’.  
+
+mysql> SELECT PNAME FROM P WHERE PNAME LIKE 'S%';
++-------+
+| PNAME |
++-------+
+| SCREW |
++-------+
+1 row in set (0.099 sec)
+
+Display all the Suppliers, belonging to cities starting with the letter ‘L’.   
+
+mysql> SELECT * FROM S WHERE CITY LIKE 'L%';
++------+-------+--------+--------+
+| Sid  | Sname | Status | City   |
++------+-------+--------+--------+
+|    5 | JOHN  |     50 | LONDON |
++------+-------+--------+--------+
+1 row in set (0.006 sec)
+
+Display all the Projects, with the third letter in JNAME as ‘n’.   
+
+mysql> SELECT * FROM J WHERE JNAME LIKE '__n%';
++------+---------+---------+
+| JID  | JNAME   | CITY    |
++------+---------+---------+
+| J4   | Console | Kolkata |
++------+---------+---------+
+1 row in set (0.006 sec)
+
+
+mysql> SELECT * FROM P WHERE PNAME LIKE '__N%';
++------+-------+-------+--------+--------+
+| PID  | PNAME | COLOR | WEIGHT | CITY   |
++------+-------+-------+--------+--------+
+| P5   | PIN   | RED   |     12 | ATHENS |
++------+-------+-------+--------+--------+
+1 row in set (0.007 sec)
