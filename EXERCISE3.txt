@@ -1,0 +1,171 @@
+SQL Exercise 3   
+1. Display all the Supplier names with the initial letter capital.   
+
+mysql> select concat(upper(left(Sname,1)),lower(substring(Sname,2))) from S;
++--------------------------------------------------------+
+| concat(upper(left(Sname,1)),lower(substring(Sname,2))) |
++--------------------------------------------------------+
+| Anu                                                    |
+| Radha                                                  |
+| Sneha                                                  |
+| Lata                                                   |
+| John                                                   |
+| Trump                                                  |
+| Biden                                                  |
++--------------------------------------------------------+
+7 rows in set (0.120 sec)
+
+ Display all the Supplier names in upper case.  
+
+mysql> SELECT UPPER(Sname) from  S;
++--------------+
+| UPPER(Sname) |
++--------------+
+| ANU          |
+| RADHA        |
+| SNEHA        |
+| LATA         |
+| JOHN         |
+| TRUMP        |
+| BIDEN        |
++--------------+
+7 rows in set (0.007 sec)
+
+Display all the Supplier names in lower case.  
+
+mysql> SELECT LOWER(Sname) FROM S;
++--------------+
+| LOWER(Sname) |
++--------------+
+| anu          |
+| radha        |
+| sneha        |
+| lata         |
+| john         |
+| trump        |
+| biden        |
++--------------+
+7 rows in set (0.005 sec)
+
+
+Display all the Supplier names padded to 25 characters, with spaces on the left.  
+
+mysql> SELECT LPAD(Sname,25,' ') from S;
++---------------------------+
+| LPAD(Sname,25,' ')        |
++---------------------------+
+|                       anu |
+|                     radha |
+|                     sneha |
+|                      lata |
+|                      john |
+|                     trump |
+|                     biden |
++---------------------------+
+7 rows in set (0.094 sec)
+
+Display all the Supplier names (with ‘la’ replaced by ‘ro’).     
+HINT: REPLACE.   
+
+
+mysql> SELECT REPLACE(Sname,'a','k') from s;
++------------------------+
+| REPLACE(Sname,'a','k') |
++------------------------+
+| knu                    |
+| rkdhk                  |
+| snehk                  |
+| lktk                   |
+| john                   |
+| trump                  |
+| biden                  |
++------------------------+
+7 rows in set (0.005 sec)
+
+
+Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced 
+with ‘o
+
+
+mysql> SELECT REPLACE(Sname,'an','nu') from s;
++--------------------------+
+| REPLACE(Sname,'an','nu') |
++--------------------------+
+| nuu                      |
+| radha                    |
+| sneha                    |
+| lata                     |
+| john                     |
+| trump                    |
+| biden                    |
++--------------------------+
+7 rows in set (0.011 sec)
+
+Display the Supplier names and the lengths of the names.  
+
+mysql> SELECT Sname,LENGTH(Sname) from S;
++-------+---------------+
+| Sname | LENGTH(Sname) |
++-------+---------------+
+| anu   |             3 |
+| radha |             5 |
+| sneha |             5 |
+| lata  |             4 |
+| john  |             4 |
+| trump |             5 |
+| biden |             5 |
++-------+---------------+
+7 rows in set (0.096 sec)
+
+
+Use the soundex function to search for a supplier by the name of ‘BLOKE’.  
+
+
+mysql> SELECT * FROM S WHERE SOUNDEX(Sname) =SOUNDEX('BLOKE');
+Empty set (0.103 sec)
+
+
+
+Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.).  
+
+mysql>  SELECT Sname,
+    ->      CASE Status
+    ->     when 10 THEN 'TEN'
+    ->     WHEN 20 THEN 'TWENTY'
+    ->     WHEN 30 THEN 'THIRTY'
+    ->     WHEN 40 THEN 'FORTY'
+    ->     WHEN 50 THEN 'FIFTY'
+    -> WHEN 60 THEN 'SIXTY'
+    -> WHEN 70 THEN 'SEVENTY'
+    -> END AS STATUS_IN_WORDS
+    -> FROM S;
++-------+-----------------+
+| Sname | STATUS_IN_WORDS |
++-------+-----------------+
+| anu   | TEN             |
+| radha | TWENTY          |
+| sneha | THIRTY          |
+| lata  | FORTY           |
+| john  | FIFTY           |
+| trump | SIXTY           |
+| biden | SEVENTY         |
++-------+-----------------+
+7 rows in set (0.018 sec)
+
+Display the current day (e.g. Thursday).  
+
+mysql> SELECT DAYNAME(CURDATE()) AS CURRENTDAY;
++------------+
+| CURRENTDAY |
++------------+
+| Friday     |
++------------+
+1 row in set (0.033 sec)
+
+mysql> SELECT DAYNAME(NOW()) AS CURRENTDAY;
++------------+
+| CURRENTDAY |
++------------+
+| Friday     |
++------------+
+1 row in set (0.006 sec)
