@@ -1,0 +1,86 @@
+Assignment – 9
+Querying Multiple Tables at Once.
+1) Write a query that lists each order number followed by the name of the customer 
+who made the order.
+
+mysql> SELECT Onum,Cname from Orders join customers on orders.cnum=customers.cnum;
++------+----------+
+| Onum | Cname    |
++------+----------+
+| 3001 | Cisneros |
+| 3003 | Hoffman  |
+| 3002 | Pereira  |
+| 3005 | Liu      |
+| 3006 | Cisneros |
+| 3009 | Giovanni |
+| 3007 | Grass    |
+| 3008 | Clemens  |
+| 3010 | Grass    |
+| 3011 | Clemens  |
++------+----------+
+10 rows in set (0.007 sec)
+
+
+ Write a query that gives the names of both the salesperson and the customer for 
+each order along with the order number.
+
+
+mysql> SELECT ONUM,SNAME,CNAME FROM ORDERS JOIN SALESPEOPLE ON ORDERS.SNUM=SALESPEOPLE.SNUM
+    -> join customers on orders.cnum=customers.cnum;
++------+---------+----------+
+| ONUM | SNAME   | CNAME    |
++------+---------+----------+
+| 3003 | Peel    | Hoffman  |
+| 3009 | Motika  | Giovanni |
+| 3005 | Serres  | Liu      |
+| 3010 | Serres  | Grass    |
+| 3007 | Serres  | Grass    |
+| 3011 | Peel    | Clemens  |
+| 3008 | Peel    | Clemens  |
+| 3006 | Axelrod | Cisneros |
+| 3001 | Axelrod | Cisneros |
+| 3002 | Rifkin  | Pereira  |
++------+---------+----------+
+10 rows in set (0.090 sec)
+
+
+Write a query that produces all customers serviced by salespeople with a 
+commission above 12%. Output the customer’s name, the salesperson’s name, 
+and the salesperson’s rate of commission. 
+
+mysql> SELECT CNAME,SNAME,COMM FROM CUSTOMERS
+    -> JOIN
+    -> SALESPEOPLE ON CUSTOMERS.SNUM=SALESPEOPLE.SNUM
+    -> WHERE COMM>0.12;
++---------+--------+------+
+| CNAME   | SNAME  | COMM |
++---------+--------+------+
+| Liu     | Serres | 0.13 |
+| Grass   | Serres | 0.13 |
+| Pereira | Rifkin | 0.15 |
++---------+--------+------+
+3 rows in set (0.107 sec)
+
+Write a query that calculates the amount of the salesperson’s commission on each 
+order by a customer with a rating above 100.
+
+
+mysql> SELECT
+    ->     ORDERS.ONUM,
+    ->     ORDERS.AMT * SALESPEOPLE.COMM AS COMMISSION_AMOUNT
+    -> FROM ORDERS
+    -> JOIN CUSTOMERS ON ORDERS.CNUM = CUSTOMERS.CNUM
+    -> JOIN SALESPEOPLE ON ORDERS.SNUM = SALESPEOPLE.SNUM
+    -> WHERE CUSTOMERS.RATING > 100;
++------+-------------------+
+| ONUM | COMMISSION_AMOUNT |
++------+-------------------+
+| 3010 |            170.29 |
+| 3007 |              9.85 |
+| 3005 |            670.86 |
+| 3009 |            188.46 |
+| 3006 |            109.82 |
+| 3001 |              1.87 |
++------+-------------------+
+6 rows in set (0.006 sec)
+

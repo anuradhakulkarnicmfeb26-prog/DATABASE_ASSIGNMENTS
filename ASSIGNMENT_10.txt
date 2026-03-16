@@ -1,0 +1,123 @@
+Assignment – 10
+Joining a Table to Itself.
+1) Write a query that produces all pairs of salespeople who are living in the same 
+city.  Exclude combinations of salespeople with themselves as well as duplicate 
+rows with the order reversed. 
+
+mysql> SELECT A.SNAME,B.SNAME,A.CITY FROM SALESPEOPLE A,SALESPEOPLE B
+    -> WHERE
+    -> A.CITY=B.CITY
+    -> AND
+    -> A.SNAME<B.SNAME;
++--------+-------+--------+
+| SNAME  | SNAME | CITY   |
++--------+-------+--------+
+| Motika | Peel  | London |
++--------+-------+--------+
+1 row in set (0.011 sec)
+
+
+mysql> SELECT A.SNAME,B.SNAME,A.CITY
+    -> FROM SALESPEOPLE AS A
+    -> JOIN SALESPEOPLE AS B
+    -> ON A.CITY=B.CITY
+    ->
+    -> AND  A.SNAME<B.SNAME;
++--------+-------+--------+
+| SNAME  | SNAME | CITY   |
++--------+-------+--------+
+| Motika | Peel  | London |
++--------+-------+--------+
+1 row in set (0.006 sec)
+
+
+
+2) Write a query that produces the names and cities of all customers with the same 
+rating as Hoffman.
+
+mysql> SELECT A.CNAME, A.CITY
+    -> FROM CUSTOMERS AS A
+    -> JOIN CUSTOMERS AS B ON A.RATING = B.RATING
+    -> WHERE B.CNAME = 'HOFFMAN'
+    -> AND A.CNAME <> 'HOFFMAN';
++---------+--------+
+| CNAME   | CITY   |
++---------+--------+
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+
+2 rows in set (0.008 sec)
+
+mysql> SELECT A.CNAME,A.CITY
+    -> FROM CUSTOMERS AS A
+    -> JOIN CUSTOMERS AS B ON A.RATING=B.RATING
+    -> WHERE B.CNAME='HOFFMAN'
+    -> AND A.CNAME!='HOFFMAN';
++---------+--------+
+| CNAME   | CITY   |
++---------+--------+
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+
+2 rows in set (0.007 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
