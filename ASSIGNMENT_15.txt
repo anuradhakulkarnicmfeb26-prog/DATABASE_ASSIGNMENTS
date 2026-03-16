@@ -1,0 +1,54 @@
+Assignment – 15
+Using Subqueries with DML Commands.
+1) Assume there is a table called Multicust, with all of the same column definitions 
+as Salespeople. Write a command that inserts all salespeople with more than one 
+customer into this table. 
+
+
+mysql> CREATE TABLE Multicust LIKE Salespeople;
+Query OK, 0 rows affected, 1 warning (0.476 sec)
+
+mysql> INSERT INTO Multicust
+    -> select * from salespeople
+    -> where snum in (
+    -> select snum from customers group by snum
+    -> having count(*) > 1)
+    -> ;
+Query OK, 2 rows affected (0.164 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from Multicust;
++------+--------+--------+------+
+| Snum | Sname  | City   | Comm |
++------+--------+--------+------+
+| 1001 | Peel   | London | 0.12 |
+| 1003 | Motika | London | 0.11 |
++------+--------+--------+------+
+2 rows in set (0.006 sec)
+
+
+2) Write a command that deletes all customers with no current orders. 
+
+
+
+mysql> DELETE FROM CUSTOMERS WHERE CNUM NOT IN (
+    -> SELECT CNUM FROM ORDERS);
+Query OK, 1 row affected (0.220 sec)
+
+mysql> DELETE FROM CUSTOMERS WHERE CNUM NOT IN (
+    -> SELECT DISTINCT CNUM FROM ORDERS);
+Query OK, 0 rows affected (0.010 sec)
+
+
+3) Write a command that increases by twenty percent the commissions of all 
+salespeople with total orders above Rs. 3,000.
+
+
+mysql> UPDATE SALESPEOPLE
+    -> SET COMM=COMM*1.20
+    -> WHERE SNUM IN (
+    -> SELECT SNUM FROM ORDERS GROUP BY SNUM
+    -> HAVING SUM(AMT) >3000
+    -> );
+Query OK, 1 row affected (0.164 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
